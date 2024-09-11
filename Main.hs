@@ -57,3 +57,28 @@ flatten (List (x:xs)) = flatten x ++ flatten (List xs)
 
 
 -- Problem 8
+
+compress :: Eq a => [a] -> [a]
+compress [] = []
+compress [x] = [x]
+compress (x:y:xs) | x == y    = compress (y:xs) 
+                  | otherwise = x : compress (y:xs)
+
+
+-- Problem 9
+
+pack :: Eq a => [a] -> [[a]]
+pack = pack' []
+    where 
+        pack' [] [] = []
+        pack' (p:ps) [] = [p:ps]
+        pack' [] (x:xs) = pack' [x] xs 
+        pack' (p:ps) (x:xs) | p == x    = pack' (x:p:ps) xs 
+                            | otherwise = (p:ps) : pack' [x] xs 
+
+
+-- Problem 10
+
+encode :: Eq a => [a] -> [(Int, a)]
+encode xs = [(length ys, head ys) | ys <- pack xs]
+
