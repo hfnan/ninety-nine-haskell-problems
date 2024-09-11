@@ -1,0 +1,3 @@
+# H-99: Ninety-Nine Haskell Problems
+
+This repository contains solutions to the [Ninety-Nine Haskell Problems](https://wiki.haskell.org/H-99:_Ninety-Nine_Haskell_Problems), which are Haskell translations of [Ninety-Nine Lisp Problems](https://www.ic.unicamp.br/~meidanis/courses/mc336/problemas-lisp/L-99_Ninety-Nine_Lisp_Problems.html), which are themselves translations of [Ninety-Nine Prolog Problems](https://web.archive.org/web/20170324220754/https://sites.google.com/site/prologsite/prolog-problems).
