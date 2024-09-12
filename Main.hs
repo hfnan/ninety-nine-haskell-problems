@@ -82,3 +82,40 @@ pack = pack' []
 encode :: Eq a => [a] -> [(Int, a)]
 encode xs = [(length ys, head ys) | ys <- pack xs]
 
+
+-- Problem 11
+
+data EncodedList a = Single a | Mutiple Int a deriving Show 
+
+encodeModified :: Eq a => [a] -> [EncodedList a]
+encodeModified xs = [if length ys == 1 
+                     then Single (head ys) 
+                     else Mutiple (length ys) (head ys) | ys <- pack xs]
+
+
+-- Problem 12
+
+decodeModified :: [EncodedList a] -> [a]
+decodeModified [] = []
+decodeModified (Single x:xs) = x : decodeModified xs
+decodeModified (Mutiple n x:xs) = replicate n x ++ decodeModified xs
+
+
+-- Problem 13
+
+encodeDirect :: Eq a => [a] -> [EncodedList a] 
+encodeDirect [] = []
+encodeDirect (x:xs) = encodeCount 1 x xs  
+    where 
+        encodeCount n p [] = [makeEncodedList n p]
+        encodeCount n p (x:xs) | p == x    = encodeCount (n + 1) p xs 
+                               | otherwise = makeEncodedList n p : encodeCount 1 x xs 
+        makeEncodedList 1 p = Single p
+        makeEncodedList n p = Mutiple n p
+
+
+-- Problem 14
+
+dupli :: [a] -> [a]
+dupli xs = concat [[x, x] | x <- xs]
+
