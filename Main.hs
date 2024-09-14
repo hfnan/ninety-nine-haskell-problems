@@ -119,3 +119,23 @@ dropEvery xs n = [x | (i, x) <- zip [1..] xs, i `mod` n /= 0]
 -- Problem 17
 split :: [a] -> Int -> ([a], [a])
 split xs n = splitAt n xs 
+
+
+-- Problem 18
+slice :: [a] -> Int -> Int -> [a]
+slice [] _ _ = []
+slice (x:xs) left right | left > right = error "Invalid index"
+                        | left <= 1 && right >= 1 = x : slice xs (left - 1) (right - 1)
+                        | otherwise = slice xs (left - 1) (right - 1) 
+
+
+-- Problem 19
+rotate :: [a] -> Int -> [a]
+rotate xs n = uncurry (flip (++)) $ splitAt (mod (n + len) len) xs
+    where len = length xs 
+
+
+-- Problem 20
+removeAt :: Int -> [a] -> (a, [a])
+removeAt i xs | i < 1 || i > length xs = error "Invalid index" 
+              | otherwise = let (ys, z:zs) = splitAt (i - 1) xs in (z, ys ++ zs)
